@@ -1,19 +1,27 @@
 1. Create a promise. Have it resolve with a value of `Promise Resolved!` in resolve after a delay of 1000ms, using `setTimeout`. Print the contents of the promise after it has been resolved by passing `console.log` to `.then`
 
 ```js
-// Your code
+let resolve = new Promise((res, rej) => {
+  setTimeout(() => res(`Promise Resolved!`), 1000);
+}).then((value) => console.log(value));
 ```
 
 2. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch`
 
 ```js
-// Your code
+let reject = new Promise((res, rej) => {
+  rej('Rejected Promise!');
+}).catch((value) => console.log(value));
 ```
 
 3. Create another promise. Now have it reject with a value of `Rejected Promise!` without using `setTimeout`. Print the contents of the promise after it has been rejected by passing console.log to `.catch` and also use `.finally` to log message `Promise Settled!`.
 
 ```js
-// Your code
+let reject = new Promise((res, rej) => {
+  rej('Rejected Promise!');
+})
+  .catch((value) => console.log(value))
+  .finally(() => console.log(`Promise Settled!`));
 ```
 
 4. What will be the output of the code below.
@@ -27,13 +35,17 @@ setTimeout(() => console.log('B'), 0); // callback queue
 // A promise that resolves right away (Microtask Queue)
 Promise.resolve().then(() => console.log('C'));
 
-console.log('D');
+console.log('D'); // A D C B
 ```
 
 5. Write a function named `wait` that accepts `time` in ms returns a promise. The promise gets resolved after given time.
 
 ```js
-// Your code
+function wait(time) {
+  return new Promise((res, rej) => {
+    setTimeout(res, time);
+  });
+}
 ```
 
 6. Do the following:
@@ -46,7 +58,13 @@ console.log('D');
 - Catch the error using `.catch`
 
 ```js
-// Your code
+let result = new Promise((res, rej) => {
+  res(21);
+})
+  .then((val) => val + 10)
+  .then((val) => val + 100)
+  .then((val) => val > 100)
+  .catch(() => `Error`);
 ```
 
 7. Do the following:
@@ -58,7 +76,12 @@ console.log('D');
 - Use `.then` and log the value
 
 ```js
-// Your code
+let result = new Promise((res, rej) => {
+  res(['A']);
+})
+  .then((val) => val.concat('B'))
+  .then((val) => Object.assign({}, val))
+  .then((val) => console.log(val));
 ```
 
 8. Do the following:
@@ -69,7 +92,13 @@ console.log('D');
 - Chain `.then` on above and return `4` also check the value you get access to by logging
 
 ```js
-// Your code
+let first = new Promise((res, rej) => {
+  res(1);
+})
+  .then((val) => ++val)
+  .then((val) => ++val)
+  .then((val) => ++val)
+  .then((val) => console.log(val));
 ```
 
 9. Do the following:
@@ -93,5 +122,5 @@ console.log('D');
 - Use `.then` to log the value
 
 ```js
-// Your code
+
 ```
