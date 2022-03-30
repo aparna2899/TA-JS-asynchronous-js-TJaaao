@@ -170,7 +170,5 @@ let pr = new Promise((res, rej) => {
       setTimeout(() => res(`Bran`), 2000);
     });
   })
-  .then((val) => {
-    console.log(val);
-  });
+  .then(console.log);
 ```
